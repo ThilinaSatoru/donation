@@ -9,7 +9,6 @@
     // Include the session ID in the response headers
     header('X-Session-Id: ' . session_id());
     session_start();
-    checkFreeChannel();
 
     // Check if the request is a POST request
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -25,9 +24,13 @@
         // Do something with the data
         // For example, you can access a value like this:
         $id = $data['responseId'];
-        echo $id;
-        echo '</br>';
-        checkFreeChannel();
+        
+        if(!empty($id)) {
+            echo $id;
+            echo '</br>';
+            checkFreeChannel();
+        }
+        
     } else {
         // Handle the error
         http_response_code(400); // Bad Request
@@ -44,7 +47,7 @@
 
 
     function checkFreeChannel() {
-        $connect = new mysqli("localhost", "root", "root", "users");
+        $connect = new mysqli("localhost", "root", "", "users");
 
         if ($connect -> connect_error) {
             die("Connection failed: " . $connect->connect_error);
@@ -54,17 +57,15 @@
         echo $_SESSION['loggedUser'];
 
         $sql = "SELECT * FROM register_users_detail WHERE user_user_name='root'";
-        $result = mysqli_query($connect, $sql);
-        $num = mysqli_num_rows($result);
+        $result = $connect->query($sql);
 
+        if ($result->num_rows > 0) {
 
-        if ($num == 1) {
-            $row = mysql_fetch_row($result);
-            if ($row[10] > 0) {
-                updateFreeAttempts($row[10]);
-                sleep(5);
-                // header("location:../appoinment.php");
+            while($row = $result->fetch_assoc()) {
+                echo $row['user_name'];
+                updateFreeAttempts($row['free_left']);
             }
+            
         }	
         else {
             echo 'You free attempts are over !';
@@ -75,12 +76,22 @@
     }
 
     function updateFreeAttempts($atmpts) {
+        $connect = new mysqli("localhost", "root", "", "users");
+
+        if ($connect -> connect_error) {
+            die("Connection failed: " . $connect->connect_error);
+        }
+
         $atmpts = $atmpts - 1;
         $sql = "UPDATE register_users_detail SET free_left='$atmpts' WHERE user_user_name='root'";
         
 
         if ($connect->query($sql) === TRUE) {
             echo "Record updated successfully";
+
+            $url = '../index.php';
+            header("Location: $url");
+
         } else {
             echo "Error updating record: " . $connect->error;
         }
