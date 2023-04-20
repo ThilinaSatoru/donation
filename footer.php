@@ -31,5 +31,11 @@
           <h3>email address</h3>
           <p>stissuebanksl@gmail.com</p>
         </div>
+
+        <div class="box">
+          <h3>Social</h3>
+          <p class="fb"><a  href=" https://www.facebook.com/sleyedonation?mibextid=ZbWKwL=">Facebook</a></p>
+          <p class="in"><a href="https://www.instagram.com/explore/locations/152593804803504/sri-lanka-eye-donation-society?igshid=MDJmNzVkMjY=">Instagram</a></p>
+        </div>
       </div>
     </section>

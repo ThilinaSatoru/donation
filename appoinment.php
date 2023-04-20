@@ -476,9 +476,9 @@
 
         <div class="row min-vh-100 align-items-center">
             <div class="content text-center text-md-left">
-                <h3>Find a Doctor</h3>
+                <h3>Need Help ?</h3>
                 <p>
-                    <a href="#contact" class="link-btn">make appointment</a>
+                    <a href="chatbot.php" class="link-btn">CHAT WITH ME</a>
             </div>
         </div>
 

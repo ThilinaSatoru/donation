@@ -1,4 +1,5 @@
 
+
 <!-- header section starts  -->
 
     <header class="header fixed-top">
@@ -9,26 +10,20 @@
             <a href="aboutus.php">about us</a>
             <a href="contact.php">Contact</a>
             <?php
-            if(isLoggedIn()) {
-              echo "<a href='appoinment.php'>be donor</a>";
-            } else {
-              echo "<a href='login.php'>Be Donor</a>";
-            }
+              if(isLoggedIn()) {
+                echo "<a href='appoinment.php'>be donor</a>";
+              } else {
+                echo "<a href='login.php'>Be Donor</a>";
+              }
             ?>
-            <?php
-            if(isLoggedIn()) {
-              echo "<a href='chatbot.php'>CHAT</a>";
-            } 
-            ?>
-            <?php
-            if(isLoggedIn()) { 
-              echo "<h4>". $_SESSION['loggedUser'] ."</h4>";
-              echo "<a href='data/logout.php'>Logout</a>";
-            }
-            ?>
-
-            <a href="api/api.php">API</a>
-            
+            <div class="left-corner nav" style="color:red; margin-left:30em">
+              <?php
+              if(isLoggedIn()) { 
+                echo "<h4>". $_SESSION['loggedUser'] ."</h4>";
+                echo "<a href='data/logout.php'>Logout</a>";
+              }
+              ?>
+            </div>
           </nav>
 
           <div id="menu-btn" class="fas fa-bars"></div>
