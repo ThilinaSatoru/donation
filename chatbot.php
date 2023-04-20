@@ -486,7 +486,7 @@
         <div class="">
             <div class="appointment">
                 <p>
-                    <a href="appoinment.php" class="link-btn">make appointment</a>
+                    <a href="appoinment.php#contact" class="link-btn">make appointment</a>
             </div>
         </div>
     </div>
