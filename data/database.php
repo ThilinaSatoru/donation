@@ -16,11 +16,11 @@
     $sql = "INSERT INTO register_users_detail ( user_name, user_address, user_phone, user_email, user_user_name, user_password,user_type,gender,user_birthday) VALUES ( '$a', '$b', '$d', '$c', '$e', '$f', '$g', '$h', '$i')";
 
     if(!mysqli_query($connect, $sql)) {
-      header("location:register.html"); 
+      header("location:../register.php"); 
       exit();
     }
     else {
-      header("location:login.html");
+      header("location:../login.php");
       exit();
     }
 

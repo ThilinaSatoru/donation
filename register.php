@@ -416,7 +416,6 @@
     />
   </head>
   <body>
-    <form action="data/database.php" method="post"></form>
 
     <!-- header section starts  -->
     <?php include 'header.php' ?>
