@@ -16,9 +16,8 @@
 
 
     if ($num == 1) {
-      // Set session variables
+      // Set session variable
       $_SESSION['loggedUser'] = $e;
-      $GLOBALS['logged_user'] = $e;
       echo $_SESSION['loggedUser'];
       header("location:../appoinment.php");
       exit();

@@ -1,4 +1,4 @@
-<?php include 'DB_connection.php'; ?>
+<?php include '../data/DB_connection.php'; ?>
 <?php 
     header('Access-Control-Allow-Origin: *');
     header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
@@ -9,6 +9,7 @@
     // Include the session ID in the response headers
     header('X-Session-Id: ' . session_id());
     session_start();
+    checkFreeChannel();
 
     // Check if the request is a POST request
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -38,9 +39,46 @@
     }
 
 
+    
+
+
 
     function checkFreeChannel() {
         $_SESSION['loggedUser'] = isset($_SESSION['loggedUser']) ? $_SESSION['loggedUser'] : null;
         echo $_SESSION['loggedUser'];
+
+        $sql = "SELECT * FROM register_users_detail WHERE user_user_name='root'";
+        $result = mysqli_query($connect, $sql);
+        $num = mysqli_num_rows($result);
+
+
+        if ($num == 1) {
+            $row = mysql_fetch_row($result);
+            if ($row[10] > 0) {
+                updateFreeAttempts($row[10]);
+                sleep(5);
+                // header("location:../appoinment.php");
+            }
+        }	
+        else {
+            echo 'You free attempts are over !';
+            exit();
+        }
+
+        $connect->close();
+    }
+
+    function updateFreeAttempts($atmpts) {
+        $atmpts = $atmpts - 1;
+        $sql = "UPDATE register_users_detail SET free_left='$atmpts' WHERE user_user_name='root'";
+        
+
+        if ($connect->query($sql) === TRUE) {
+            echo "Record updated successfully";
+        } else {
+            echo "Error updating record: " . $connect->error;
+        }
+
+        $connect->close();
     }
 ?>
