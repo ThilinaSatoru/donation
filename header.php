@@ -2,7 +2,7 @@
   <style>
     .left-corner {
       color:white; 
-      margin-left:60em;  
+      margin-left:50em;  
     }
 
     .left-corner *{
@@ -20,6 +20,7 @@
             <a href="index.php">home</a>
             <a href="aboutus.php">about us</a>
             <a href="contact.php">Contact</a>
+            <a href="doctors.php">Doctors</a>
             <?php
               if(isLoggedIn()) {
                 echo "<a href='appoinment.php'>Donate</a>";
