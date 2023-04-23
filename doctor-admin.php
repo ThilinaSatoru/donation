@@ -1,10 +1,66 @@
 <?php include 'data/init.php'; ?>
+<?php include 'data/DB_connection.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <style>
     @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap");
+
+    /* Full-width inputs */
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    input[type="password"] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
+
+    /* Set a style for all buttons */
+    button {
+        background-color: #00b8b8;
+        color: white;
+        font-size: 20px;
+        margin-bottom: 10%;
+        padding: 14px 20px;
+        margin: 8px 10px;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+    }
+
+    /* Add a hover effect for buttons */
+    button:hover {
+        opacity: 0.8;
+    }
+
+    .Select-box {
+        border: none;
+        appearance: none;
+        padding: 0 30px 0 15px;
+        width: 100%;
+        color: rgb(14, 13, 13);
+        background-color: #f3f3f3;
+        font-size: 18px;
+    }
+
+    /* The "Forgot password" text */
+    span.psw {
+        float: right;
+        padding-top: 16px;
+    }
+
+    /* Change styles for span and cancel button on extra small screens */
+    @media screen and (max-width: 300px) {
+        span.psw {
+            display: block;
+            float: none;
+        }
+    }
 
     :root {
         --blue: #00b8b8;
@@ -452,44 +508,130 @@
     <?php include 'header.php' ?>
     <!-- header section ends -->
 
+    <?php
+    include('data/functions.php');
+    $health = '';
+    $idd = '';
+    $fetchData = fetch_data();
+
+    if (isset($_GET['load']) == TRUE) {
+        $idd = $_GET['idd'];
+        $sql = "SELECT health FROM donar_status WHERE donar = $idd;";
+
+        $result = $connect->query($sql);
+        if ($result == true) {
+            if ($result->num_rows > 0) {
+                $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
+                $health = $row[0]['health'];
+            } else {
+                $health = '';
+            }
+        }
+    }
+
+    if(isset($_POST['update']) == TRUE) {
+        $health = $_POST['health'];
+        $sql = "UPDATE donar_status SET health ='$health' WHERE donar = $idd;";
+
+        if ($connect->query($sql) === TRUE) {
+            $health = '';
+            $fetchData = fetch_data();
+        } 
+        $connect->close();
+    }
+
+    ?>
+
 
     <section class="home" id="home">
-        <div class="container" style="margin-top: 10em; margin-bottom: 25em;">
-            <h1>About Us</h1>
+        <div class="container" style="margin-top: 10em; margin-bottom: 1em;">
+            <h1>Donors</h1>
             <div class="row">
+
                 <table class="table">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">First</th>
-                            <th scope="col">Last</th>
-                            <th scope="col">Handle</th>
-                        </tr>
-                    </thead>
+                    <thead>
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Full Name</th>
+                                <th scope="col">Gender</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Mobile Number</th>
+                                <th scope="col">Address</th>
+                                <th scope="col">Username</th>
+                                <th scope="col">DOB</th>
+                                <th scope="col">Type</th>
+                                <th scope="col">HEALTH</th>
+                                <th scope="col">Free Left</th>
+                                <th scope="col">Update</th>
+                        </thead>
                     <tbody>
+                        <?php
+                        
+                        // $fetchData = fetch_data();
+                        if (is_array($fetchData)) {
+                            foreach ($fetchData as $data) {
+                        ?>
                         <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
+                            <td><?php echo $data['idnumber']; ?></td>
+                            <td><?php echo $data['user_name']; ?></td>
+                            <td><?php echo $data['gender']; ?></td>
+                            <td><?php echo $data['user_email']; ?></td>
+                            <td><?php echo $data['user_phone']; ?></td>
+                            <td><?php echo $data['user_address']; ?></td>
+                            <td><?php echo $data['user_user_name']; ?></td>
+                            <td><?php echo $data['user_birthday']; ?></td>
+                            <td><?php echo $data['user_type']; ?></td>
+                            <td><?php echo $data['health']; ?></td>
+                            <td><?php echo $data['free_left']; ?></td>
+                            <form action="" method="GET">
+                                <td>
+                                    <input type="hidden" name="idd" value=<?php echo $data['idnumber']; ?> />
+                                    <button type="submit" name="load"
+                                        id=<?php echo $data['idnumber']; ?>>Update</button>
+                                </td>
+                            </form>
                         </tr>
+                        <?php
+                            }
+                        } else { ?>
                         <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                        </tr>
+                            <td colspan="8">
+                                <?php echo $fetchData; ?>
+                            </td>
                         <tr>
-                            <th scope="row">3</th>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>@twitter</td>
-                        </tr>
+                            <?php
+                        } ?>
                     </tbody>
                 </table>
+
+            </div>
+        </div>
+
+
+        <div class="container">
+            <div class="row min-vh-100 align-items-center">
+                <div class="content text-center text-md-left">
+                    <form action="" method="post">
+                        <h1>Update Here</h1>
+
+                        <form>
+                            <label for="name">Health Status</label><br />
+                            <input type="text" name="health" placeholder=<?php echo $health ?>
+                                value=<?php echo $health ?> /><br /><br />
+
+                            <button type="submit" value="Submit" name="update">
+                                Register
+                            </button>
+                        </form>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
+
+
+
 
     <!-- footer section -->
     <?php include 'footer.php' ?>

@@ -5,35 +5,43 @@
 function checkFreeChannel() {
     include 'DB_connection.php'; 
     $free = 0;
-
-    $_SESSION['loggedUser'] = isset($_SESSION['loggedUser']) ? $_SESSION['loggedUser'] : null;
-    echo $_SESSION['loggedUser'];
     $user = readSessionData();
+    echo "<script>alert('You have' . $user[1]')</script>";
 
-    $sql = "SELECT * FROM donar WHERE user_user_name='$user[0]'";
+    $sql = "SELECT * FROM donar WHERE user_user_name='$user[0]';";
     $result = $connect->query($sql);
+    $out = '';
 
-    if ($result -> num_rows > 0) {
-        while($row = $result->fetch_assoc()) {
-            $free = $row['free_left'];
-            echo "<script>alert('You have' . $free . 'free attempts')</script>";
-            // updateFreeAttempts($free);
+    if ($result == true) {
+        if ($result->num_rows > 0) {
+            $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
+            echo $row[0]['idnumber'];
+            $userID = $row[0]['idnumber'];
+
+            $sql = "SELECT * FROM donar_status 
+                WHERE donar= '$userID'; ";
+            $result = $connect->query($sql);
+            $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+            $free = $row[0]['free_left'];
+            updateFreeAttempts($free, $userID);
         }
     }	
     else {
         echo "Donar not found in system!";    
     }
 
+    
+
     $connect->close();
     return $free;
 }
 
-function updateFreeAttempts($atmpts) {
+function updateFreeAttempts($atmpts, $userID) {
     include 'DB_connection.php';
-    $user = readSessionData();
 
     $atmpts = $atmpts - 1;
-    $sql = "UPDATE donar SET free_left='$atmpts' WHERE user_user_name='$user[0]'";
+    $sql = "UPDATE donar_status SET free_left='$atmpts' WHERE donar='$userID'";
     
 
     if ($connect->query($sql) === TRUE) {
@@ -64,16 +72,40 @@ function insertAppointment($n, $e) {
     }
 }
 
-function writeSessionData($user, $type)
-{
+function writeSessionData($user, $type) {
     $myfile = fopen("session.txt", "w") or die("Unable to open file!");
     fwrite($myfile, $user . "\n");
     fwrite($myfile, $type . "\n");
     fclose($myfile);
 }
 
-function readSessionData()
-{
+function readSessionData() {
     $lines = file('session.txt', FILE_SKIP_EMPTY_LINES | FILE_IGNORE_NEW_LINES);
     return $lines;
 }
+
+
+
+function fetch_data() {
+    include 'DB_connection.php';
+
+    if (empty($connect)) {
+        $msg = "Database connection error";
+    }  else {
+        $query = "SELECT idnumber,user_name,gender,user_email,user_phone,user_address,user_user_name,user_birthday,user_type,health,free_left
+        FROM donar JOIN donar_status ON donar.idnumber = donar_status.donar ORDER BY idnumber DESC;";
+        $result = $connect->query($query);
+        if ($result == true) {
+            if ($result->num_rows > 0) {
+                $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
+                $msg = $row;
+            } else {
+                $msg = "No Data Found";
+            }
+        } else {
+            $msg = mysqli_error($connect);
+        }
+    }
+    return $msg;
+}
+?>
