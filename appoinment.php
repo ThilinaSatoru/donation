@@ -1,4 +1,27 @@
 <?php include 'data/init.php'; ?>
+<?php include 'data/functions.php'; ?>
+<?php include 'data/DB_connection.php'; ?>
+<?php
+
+
+if(isset($_POST['submit'])) {
+
+   $free = checkFreeChannel();
+
+   if($free > 0) {
+      echo 'Free Appointment.';
+      updateFreeAttempts($free);
+      insertAppointment($_POST['name'], $_POST['email']);
+   } else {
+      echo 'Your free Appointments are over!';
+      insertAppointment($_POST['name'], $_POST['email']);
+   }
+
+   
+
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,7 +47,7 @@
       text-decoration: none !important;
       text-transform: capitalize;
    }
-
+   --red
    *::-webkit-scrollbar{
       height: .5rem;
       width: 1rem;
@@ -562,7 +585,7 @@
 
     <h1 class="heading">make appointment</h1>
 
-    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+    <form action="appoinment.php" method="post">
         <?php
          if(isset($message)){
             foreach($message as $message){

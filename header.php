@@ -1,4 +1,15 @@
+<head>
+  <style>
+    .left-corner {
+      color:white; 
+      margin-left:60em;  
+    }
 
+    .left-corner *{
+      text-transform: uppercase;
+    }
+  </style>
+</head>
 
 <!-- header section starts  -->
 
@@ -11,18 +22,14 @@
             <a href="contact.php">Contact</a>
             <?php
               if(isLoggedIn()) {
-                echo "<a href='appoinment.php'>be donor</a>";
+                echo "<a href='appoinment.php'>Donate</a>";
+                echo "<a href='data/logout.php'>Logout</a>";
               } else {
-                echo "<a href='login.php'>Be Donor</a>";
+                echo "<a href='login.php'>Be a Donor</a>";
               }
             ?>
-            <div class="left-corner nav" style="color:red; margin-left:30em">
-              <?php
-              if(isLoggedIn()) { 
-                echo "<h4>". $_SESSION['loggedUser'] ."</h4>";
-                echo "<a href='data/logout.php'>Logout</a>";
-              }
-              ?>
+            <div class="left-corner nav">
+              <?php if(isLoggedIn()) { echo "<h4>DONOR : ". $_SESSION['loggedUser'] ."</h4>";}?>
             </div>
           </nav>
 

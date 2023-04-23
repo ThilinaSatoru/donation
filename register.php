@@ -1,4 +1,34 @@
 <?php include 'data/init.php'; ?>
+<?php include 'DB_connection.php'; ?>
+<?php
+
+  if($_POST["add"] == "Submit")
+  {
+    $a=$_POST["Name"];
+    $b=$_POST["Address"];
+    $d=$_POST["Telephone"];
+    $c=$_POST["Email"];
+    $e=$_POST["User_Name"];
+    $f=$_POST["Password"];
+    $g=$_POST["userstype"];
+    $h=$_POST["Gender"];
+    $i=$_POST["Date_of_birth"];
+
+    $sql = "INSERT INTO register_users_detail ( user_name, user_address, user_phone, user_email, user_user_name, user_password,user_type,gender,user_birthday) VALUES ( '$a', '$b', '$d', '$c', '$e', '$f', '$g', '$h', '$i')";
+
+    if(!mysqli_query($connect, $sql)) {
+      header("location:register.php"); 
+      exit();
+    }
+    else {
+      header("location:login.php");
+      exit();
+    }
+
+    $con->close();
+  }
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -7,6 +37,8 @@
 
       /* Full-width inputs */
       input[type="text"],
+      input[type="email"],
+      input[type="number"],
       input[type="password"] {
         width: 100%;
         padding: 12px 20px;
@@ -427,7 +459,7 @@
       <div class="container">
         <div class="row min-vh-100 align-items-center">
           <div class="content text-center text-md-left">
-            <form action="data/database.php" method="post">
+            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
               <h1>Register Here</h1>
 
               <form>
@@ -451,7 +483,7 @@
 
                 <label for="email">Email</label><br />
                 <input
-                  type="text"
+                  type="email"
                   id="Email"
                   name="Email"
                   placeholder="user Email.."
@@ -460,7 +492,7 @@
 
                 <label for="telephone">Telphone Number</label><br />
                 <input
-                  type="text"
+                  type="number"
                   id="Telephone"
                   name="Telephone"
                   placeholder="user Telphone.."

@@ -113,7 +113,7 @@
       }
 
       .home {
-        background: url(images/background.jpg) no-repeat;
+        background: url(images/banner.jpg) no-repeat;
         background-size: cover;
         background-position: center;
       }
@@ -132,7 +132,9 @@
       .home .content p {
         line-height: 2;
         font-size: 1.5rem;
-        color: #000000;
+        align-items: left;
+        color: var(--white);
+        
         padding: rem 0;
       }
 
@@ -147,7 +149,7 @@
 
       .about .content h3 {
         font-size: 3rem;
-        color: var(--black);
+        color: var(--white);
         margin-top: 1rem;
       }
 

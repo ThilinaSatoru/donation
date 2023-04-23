@@ -20,11 +20,7 @@
           <br />
         </div>
 
-        <div class="box">
-          <i class="fas fa-clock"></i>
-          <h3>opening hours</h3>
-          <p>00:07am to 10:00pm</p>
-        </div>
+        
 
         <div class="box">
           <i class="fas fa-envelope"></i>
@@ -34,8 +30,17 @@
 
         <div class="box">
           <h3>Social</h3>
-          <p class="fb"><a  href=" https://www.facebook.com/sleyedonation?mibextid=ZbWKwL=">Facebook</a></p>
-          <p class="in"><a href="https://www.instagram.com/explore/locations/152593804803504/sri-lanka-eye-donation-society?igshid=MDJmNzVkMjY=">Instagram</a></p>
+
+          <a target="_blank" href=" https://www.facebook.com/sleyedonation?mibextid=ZbWKwL=">
+            <img src="images\facebook.png" alt="IMG" width="40" height="40"></a>&nbsp;
+
+          <a target="_blank" href="https://www.instagram.com/explore/locations/152593804803504/sri-lanka-eye-donation-society?igshid=MDJmNzVkMjY=">
+          <img src="images\instagram.png" alt="IMG" width="50" height="50"></a>&nbsp;
+
+
+          <img src="images\whatsapp.png" alt="IMG" width="50" height="50"></a>
+
+          
         </div>
       </div>
     </section>

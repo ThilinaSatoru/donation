@@ -407,7 +407,7 @@
   </head>
   <body>
     <?php include 'header.php' ?>
-    <form action="data/database.php" method="post"></form>
+    <form action="data/login.php" method="post"></form>
     <!-- home section starts  -->
     <section class="home" id="home">
       <div class="container">

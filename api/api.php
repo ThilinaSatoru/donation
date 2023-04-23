@@ -1,4 +1,4 @@
-<?php include '../data/DB_connection.php'; ?>
+<?php include '../data/functions.php'; ?>
 <?php 
     header('Access-Control-Allow-Origin: *');
     header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
@@ -28,7 +28,7 @@
         if(!empty($id)) {
             echo $id;
             echo '</br>';
-            checkFreeChannel();
+            // checkFreeChannel();
         }
         
     } else {
@@ -46,56 +46,5 @@
 
 
 
-    function checkFreeChannel() {
-        $connect = new mysqli("localhost", "root", "", "users");
-
-        if ($connect -> connect_error) {
-            die("Connection failed: " . $connect->connect_error);
-        }
-
-        $_SESSION['loggedUser'] = isset($_SESSION['loggedUser']) ? $_SESSION['loggedUser'] : null;
-        echo $_SESSION['loggedUser'];
-
-        $sql = "SELECT * FROM register_users_detail WHERE user_user_name='root'";
-        $result = $connect->query($sql);
-
-        if ($result->num_rows > 0) {
-
-            while($row = $result->fetch_assoc()) {
-                echo $row['user_name'];
-                updateFreeAttempts($row['free_left']);
-            }
-            
-        }	
-        else {
-            echo 'You free attempts are over !';
-            exit();
-        }
-
-        $connect->close();
-    }
-
-    function updateFreeAttempts($atmpts) {
-        $connect = new mysqli("localhost", "root", "", "users");
-
-        if ($connect -> connect_error) {
-            die("Connection failed: " . $connect->connect_error);
-        }
-
-        $atmpts = $atmpts - 1;
-        $sql = "UPDATE register_users_detail SET free_left='$atmpts' WHERE user_user_name='root'";
-        
-
-        if ($connect->query($sql) === TRUE) {
-            echo "Record updated successfully";
-
-            $url = '../index.php';
-            header("Location: $url");
-
-        } else {
-            echo "Error updating record: " . $connect->error;
-        }
-
-        $connect->close();
-    }
+    
 ?>

@@ -1,8 +1,6 @@
-<?php include 'data/init.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap');
 
@@ -24,20 +22,7 @@
       text-decoration: none !important;
       text-transform: capitalize;
    }
-
-   .appointment{
-      
-      
-      padding-left: 43%;
-      padding-top: 5%;
-   }
-
-   .chatbot{
-      
-      padding-left: 10%;
-      
-   }
-
+   --red
    *::-webkit-scrollbar{
       height: .5rem;
       width: 1rem;
@@ -59,7 +44,7 @@
    }
 
    section{
-      padding:2rem 2rem;
+      padding:7rem 2rem;
    }
 
    .heading{
@@ -72,6 +57,8 @@
    }
 
    .link-btn{
+    align-self: center;
+    align-content: center;
       display: inline-block;
       padding:1rem 3rem;
       border-radius: .5rem;
@@ -125,14 +112,14 @@
    }
 
    .home{
-   
+      background:url(images/background.jpg) no-repeat;
       background-size: cover;
       background-position: center;
    }
 
    .home .content{
-      width: o;
-      padding:0;
+      width: 55rem;
+      padding:2rem;
    }
 
    .home .content h3{
@@ -150,7 +137,6 @@
 
    .about .row{
       min-height: 50vh;
-   
    }
 
    .about .content span{
@@ -191,7 +177,7 @@
 
    .services .box-container .box img{
       margin:1rem 0;
-      height: 40rem;
+      height: 4rem;
    }
 
    .services .box-container .box h3{
@@ -208,24 +194,27 @@
 
    .process .box-container{
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(3rem, 1fr));
-      gap:1rem;
+      grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+      gap:2rem;
    }
 
    .process .box-container .box{
-   
-      padding:0rem;
-      margin-left: 10rem;
-
-   
+      background-color: var(--blue);
+      padding:2rem;
+      border-radius: .5rem;
+      text-align: center;
+      box-shadow: var(--box-shadow);
    }
 
-
+   .process .box-container .box img{
+      height: 20rem;
+      margin:1rem 0;
+   }
 
    .process .box-container .box h3{
       font-size: 2rem;
       color:var(--white);
-   
+      margin:1.5rem 0;
    }
 
    .process .box-container .box p{
@@ -377,6 +366,8 @@
 
 
 
+
+
    /* media queries  */
 
    @media (max-width:991px){
@@ -433,7 +424,7 @@
       }
 
       .home{
-         background-position: center;
+         background-position: left;
       }
 
       .home .content{
@@ -455,7 +446,6 @@
       .heading{
          font-size: 3rem;
       }
-      
 
    }
 
@@ -463,53 +453,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>doctor channeling for donors</title>
-
-    <!-- font awesome cdn link for my site -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
-    <!-- bootstrap cdn link for my site  -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/css/bootstrap.min.css">
-
+    <title>Document</title>
 </head>
 <body>
-<form action="database.php" method="post">
-
-</form>
-<!-- header section starts  -->
-<?php include 'header.php' ?>
-<!-- header section ends -->
-
-
-
-<section class="home" id="home" style="margin-top: 10em;">
-    <div class="">
-        <div class="">
-            <div class="chatbot">
-            <iframe
-               allow="microphone;"
-               width="350"
-               height="430"
-               src="https://console.dialogflow.com/api-client/demo/embedded/0706df90-0131-40de-8902-2c5316a092d0">
-            </iframe>
-      
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="home" id="home">
-    <div class="">
-        <div class="">
-            <div class="appointment">
-                <p>
-                    <a href="appoinment.php#contact" class="link-btn">make appointment</a>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- footer section -->
-<?php include 'footer.php' ?>
-
+    <section>
+        <h1 style="text-align: center;" class="heading">Thank You. Your Appointment Submitted.</h1>
+        <a href="index.php" class="link-btn" style="text-align: center;">Go To Menu</a>
+    </section>
+    
 </body>
 </html>
