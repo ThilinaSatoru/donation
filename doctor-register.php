@@ -1,4 +1,33 @@
 <?php include 'data/init.php'; ?>
+<?php include 'data/DB_connection.php'; ?>
+<?php
+
+if (isset($_POST["add"])) {
+    $n = $_POST["Name"];
+    $c = $_POST["Telephone"];
+    $e = $_POST["Email"];
+    $u = $_POST["User_Name"];
+    $p = $_POST["Password"];
+    $t = $_POST["user_type"];
+    $s = $_POST["special"];
+    $b = $_POST["dob"];
+
+
+    $sql = "INSERT INTO doctor (name, contact, email, user_name, user_password, user_type, specialization, birthday)
+                VALUES ('$n', '$c', '$e', '$u', '$p', '$t', '$s', '$b');";
+
+    if ($connect->multi_query($sql) != TRUE) {
+        header("location:doctor-register.php");
+        exit();
+    } else {
+        header("location:doctor-login.php");
+        exit();
+    }
+
+    $con->close();
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,6 +37,8 @@
 
     /* Full-width inputs */
     input[type="text"],
+    input[type="email"],
+    input[type="number"],
     input[type="password"] {
         width: 100%;
         padding: 12px 20px;
@@ -21,7 +52,7 @@
     button {
         background-color: #00b8b8;
         color: white;
-
+        font-size: 20px;
         margin-bottom: 10%;
         padding: 14px 20px;
         margin: 8px 10px;
@@ -35,8 +66,14 @@
         opacity: 0.8;
     }
 
-    label {
-        font-size: 15px;
+    .Select-box {
+        border: none;
+        appearance: none;
+        padding: 0 30px 0 15px;
+        width: 100%;
+        color: rgb(14, 13, 13);
+        background-color: #f3f3f3;
+        font-size: 18px;
     }
 
     /* The "Forgot password" text */
@@ -133,6 +170,10 @@
         border: 0;
     }
 
+    label {
+        font-size: 20px;
+    }
+
     .header .logo {
         font-size: 2rem;
         color: var(--black);
@@ -160,7 +201,7 @@
     }
 
     .home {
-        background: url(images/organ-donation.jpg) no-repeat;
+        background: url(images/background.jpg) no-repeat;
         background-size: cover;
         background-position: center;
     }
@@ -402,38 +443,58 @@
 </head>
 
 <body>
+
+    <!-- header section starts  -->
     <?php include 'header.php' ?>
-    <form action="data/login.php" method="post"></form>
-    <!-- home section starts  -->
+    <!-- header section ends -->
+
+    <!-- home section starts -->
+
     <section class="home" id="home">
         <div class="container">
             <div class="row min-vh-100 align-items-center">
                 <div class="content text-center text-md-left">
-                    <form action="data/login.php" method="post">
-                        <h1>Donor's Login</h1>
+                    <form action="doctor-register.php" method="post">
+                        <h1>Register Here</h1>
 
                         <form>
-                            <label for="name"><b>Username</b></label>
-                            <input type="text" placeholder="Enter Username" name="name" id="name" required />
+                            <label for="name">Name</label><br />
+                            <input type="text" id="Name" name="Name" placeholder="user Name.." required /><br /><br />
 
-                            <label for="psw"><b>Password</b></label>
-                            <input type="password" placeholder="Enter Password" name="password" id="password"
-                                required />
-                            <button type="submit" value="donar_login" name="donar_login" id="submit">
-                                Login
-                            </button>
-                        </form>
+                            <label for="email">Email</label><br />
+                            <input type="email" id="Email" name="Email" placeholder="user Email.."
+                                required /><br /><br />
 
-                        <br />
-                        <form action="register.php" method="POST">
-                            <button type="submit" value="donar_register" name="donar_register">
-                                Create Account
-                            </button>
-                        </form>
-                        <br />
-                        <form action="register.php" method="POST">
-                            <button type="submit" value="Forget_Password" name="Forget_Password">
-                                Forget Password
+                            <label for="telephone">Telphone Number</label><br />
+                            <input type="number" id="Telephone" name="Telephone" placeholder="user Telphone.."
+                                required /><br /><br />
+
+                            <label for="user_name">User Name</label><br />
+                            <input type="text" id="User_Name" name="User_Name" placeholder="user  name.."
+                                required /><br /><br />
+
+                            <label for="Password"> Password</label><br />
+                            <input type="Password" id="Password" name="Password" placeholder="user password.."
+                                required /><br /><br />
+
+                            <div class="dropdown">
+                                <label for="userstype">User Type:</label>
+                                <select class="Select-box" name="user_type" id="userstype">
+                                    <option value="Donar">Doctor</option>
+                                </select>
+                            </div>
+
+                            <br /><br />
+
+                            <label for="name">Specialization</label><br />
+                            <input type="text" id="special" name="special" placeholder="Specialization..." required />
+                            <br /><br />
+
+                            <label for="Date_of_birth">Date of birth</label><br />
+                            <input type="text" id="dob" name="dob" placeholder="Birthday.." required /><br /><br />
+
+                            <button type="submit" value="Submit" name="add">
+                                Register
                             </button>
                         </form>
                     </form>

@@ -47,7 +47,7 @@
                         <img src="images/man2.png">
                     </div>
                     <div class="card-details">
-                        <h4>CEO of Razor</h4>
+                        <h4>Dermatologist</h4>
                         <p>Dr. Harold Markman</p>
                         <a href="#">Read All ></a>
                     </div>
@@ -59,8 +59,8 @@
                         <img src="images/man1.png">
                     </div>
                     <div class="card-details">
-                        <h4>Director of Technology</h4>
-                        <p>Prof. George Crypto</p>
+                        <h4>Skin Specialist</h4>
+                        <p>Dr. George Crypto</p>
                         <a href="#">Read All ></a>
                     </div>
                 </div>
@@ -71,8 +71,8 @@
                         <img src="images/man3.png">
                     </div>
                     <div class="card-details">
-                        <h4>Marketing Manager</h4>
-                        <p>Steve Freeman</p>
+                        <h4>Eye Surgeon</h4>
+                        <p>Dr. Steve Freeman</p>
                         <a href="#">Read All ></a>
                     </div>
                 </div>
@@ -83,8 +83,8 @@
                         <img src="images/man4.png">
                     </div>
                     <div class="card-details">
-                        <h4>Financial Manager</h4>
-                        <p>James Stevenson</p>
+                        <h4>Eye Care Specialist</h4>
+                        <p>Dr. James Stevenson</p>
                         <a href="#">Read All ></a>
                     </div>
                 </div>

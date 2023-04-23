@@ -160,7 +160,7 @@
     }
 
     .home {
-        background: url(images/organ-donation.jpg) no-repeat;
+        background: url(images/background.jpg) no-repeat;
         background-size: cover;
         background-position: center;
     }
@@ -410,7 +410,7 @@
             <div class="row min-vh-100 align-items-center">
                 <div class="content text-center text-md-left">
                     <form action="data/login.php" method="post">
-                        <h1>Donor's Login</h1>
+                        <h1>Doctor's Login</h1>
 
                         <form>
                             <label for="name"><b>Username</b></label>
@@ -419,20 +419,20 @@
                             <label for="psw"><b>Password</b></label>
                             <input type="password" placeholder="Enter Password" name="password" id="password"
                                 required />
-                            <button type="submit" value="donar_login" name="donar_login" id="submit">
+                            <button type="submit" value="doctor_login" name="doctor_login" id="doctor_login">
                                 Login
                             </button>
                         </form>
 
                         <br />
-                        <form action="register.php" method="POST">
-                            <button type="submit" value="donar_register" name="donar_register">
+                        <form action="doctor-register.php" method="POST">
+                            <button type="submit" value="doctor_register" name="doctor_register">
                                 Create Account
                             </button>
                         </form>
                         <br />
-                        <form action="register.php" method="POST">
-                            <button type="submit" value="Forget_Password" name="Forget_Password">
+                        <form action="doctor-register.php" method="POST">
+                            <button type="submit" value="Forget Password" name="Forget Password">
                                 Forget Password
                             </button>
                         </form>

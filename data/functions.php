@@ -8,8 +8,9 @@ function checkFreeChannel() {
 
     $_SESSION['loggedUser'] = isset($_SESSION['loggedUser']) ? $_SESSION['loggedUser'] : null;
     echo $_SESSION['loggedUser'];
+    $user = readSessionData();
 
-    $sql = "SELECT * FROM register_users_detail WHERE user_user_name='root'";
+    $sql = "SELECT * FROM donar WHERE user_user_name='$user[0]'";
     $result = $connect->query($sql);
 
     if ($result -> num_rows > 0) {
@@ -29,9 +30,10 @@ function checkFreeChannel() {
 
 function updateFreeAttempts($atmpts) {
     include 'DB_connection.php';
+    $user = readSessionData();
 
     $atmpts = $atmpts - 1;
-    $sql = "UPDATE register_users_detail SET free_left='$atmpts' WHERE user_user_name='root'";
+    $sql = "UPDATE donar SET free_left='$atmpts' WHERE user_user_name='$user[0]'";
     
 
     if ($connect->query($sql) === TRUE) {
@@ -60,4 +62,18 @@ function insertAppointment($n, $e) {
     }else{
         echo 'appointment failed';
     }
+}
+
+function writeSessionData($user, $type)
+{
+    $myfile = fopen("session.txt", "w") or die("Unable to open file!");
+    fwrite($myfile, $user . "\n");
+    fwrite($myfile, $type . "\n");
+    fclose($myfile);
+}
+
+function readSessionData()
+{
+    $lines = file('session.txt', FILE_SKIP_EMPTY_LINES | FILE_IGNORE_NEW_LINES);
+    return $lines;
 }
